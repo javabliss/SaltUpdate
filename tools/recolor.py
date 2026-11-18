@@ -74,4 +74,37 @@ for (x, y) in cells[:8]:
 for (x, y) in cells[8:12]:
     px[x, y] = (236, 238, 242, 255)
 save(pot, "item/salted_potato")
+
+def whiten_item(im, white=(244, 246, 250), gamma=0.75):
+    """Предмет: яркость относительно самого яркого пикселя, форма и контур сохраняются."""
+    px = im.load()
+    mx = max(lum(px[x, y]) for x in range(im.width) for y in range(im.height) if px[x, y][3])
+    for x in range(im.width):
+        for y in range(im.height):
+            p = px[x, y]
+            if p[3]:
+                f = (lum(p) / mx) ** gamma
+                px[x, y] = tuple(int(c * f) for c in white) + (p[3],)
+    return im
+
+# Осколок соли: осколок эха, перекрашенный в белый
+save(whiten_item(load("item/echo_shard")), "item/salt_crystal")
+
+# Соляная пыль: ванильный сахар, чуть холоднее по цвету и с крупными крупинками
+dust = load("item/sugar")
+dpx = dust.load()
+for x in range(16):
+    for y in range(16):
+        p = dpx[x, y]
+        if p[3]:
+            dpx[x, y] = (max(0, p[0] - 10), max(0, p[1] - 5), p[2], p[3])
+cells = [(x, y) for x in range(16) for y in range(16)
+         if dpx[x, y][3] and all(0 <= x + dx < 16 and 0 <= y + dy < 16 and dpx[x + dx, y + dy][3]
+                                 for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+random.Random(7).shuffle(cells)
+for (x, y) in cells[:5]:
+    dpx[x, y] = (168, 182, 206, 255)
+for (x, y) in cells[5:8]:
+    dpx[x, y] = (255, 255, 255, 255)
+save(dust, "item/salt_dust")
 print("recolor done")
