@@ -1,5 +1,23 @@
 package dev.saltupdate;
 
+import com.google.common.collect.ImmutableSet;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.neoforged.neoforge.common.BasicItemListing;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -91,10 +109,48 @@ public class SaltUpdate {
     public static final DeferredHolder<Feature<?>, TravertineTerracesFeature> TERRACES =
             FEATURES.register("travertine_terraces", TravertineTerracesFeature::new);
 
+    // ---------- Ящерица ----------
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, MOD_ID);
+    public static final DeferredHolder<EntityType<?>, EntityType<LizardEntity>> LIZARD = ENTITIES.register("lizard",
+            () -> EntityType.Builder.of(LizardEntity::new, MobCategory.CREATURE)
+                    .sized(0.7F, 0.4F).eyeHeight(0.3F).clientTrackingRange(8).build("lizard"));
+    public static final DeferredItem<DeferredSpawnEggItem> LIZARD_EGG = ITEMS.register("lizard_spawn_egg",
+            () -> new DeferredSpawnEggItem(LIZARD, 0x7a8a3e, 0x4e5c26, new Item.Properties()));
+
+    // ---------- Торговец солью ----------
+    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(Registries.POINT_OF_INTEREST_TYPE, MOD_ID);
+    public static final DeferredHolder<PoiType, PoiType> SALT_POI = POI_TYPES.register("salt_merchant",
+            () -> new PoiType(ImmutableSet.copyOf(CHISELED_SALT.get().getStateDefinition().getPossibleStates()), 1, 1));
+    public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(BuiltInRegistries.VILLAGER_PROFESSION, MOD_ID);
+    public static final DeferredHolder<VillagerProfession, VillagerProfession> SALT_MERCHANT = PROFESSIONS.register("salt_merchant",
+            () -> new VillagerProfession("salt_merchant", h -> h.is(SALT_POI.getId()), h -> h.is(SALT_POI.getId()),
+                    ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_BUTCHER));
+
+    private static void trades(VillagerTradesEvent e) {
+        if (e.getType() != SALT_MERCHANT.get()) return;
+        var t = e.getTrades();
+        t.get(1).add(new BasicItemListing(new ItemStack(SALT_CRYSTAL.get(), 12), new ItemStack(Items.EMERALD), 16, 2, 0.05F));
+        t.get(1).add(new BasicItemListing(1, new ItemStack(JERKY.get(), 4), 12, 1, 0.05F));
+        t.get(1).add(new BasicItemListing(1, new ItemStack(SALT_DUST.get(), 6), 16, 1, 0.05F));
+        t.get(2).add(new BasicItemListing(1, new ItemStack(PRETZEL.get(), 4), 12, 5, 0.05F));
+        t.get(2).add(new BasicItemListing(2, new ItemStack(SALTED_FISH.get(), 3), 12, 5, 0.05F));
+        t.get(3).add(new BasicItemListing(2, new ItemStack(SALTED_POTATO.get(), 4), 12, 10, 0.05F));
+        t.get(3).add(new BasicItemListing(3, new ItemStack(SALT_BRICKS.get(), 12), 12, 10, 0.05F));
+        t.get(4).add(new BasicItemListing(5, new ItemStack(SALT_BLOCK.get(), 16), 8, 15, 0.05F));
+        t.get(5).add(new BasicItemListing(12, new ItemStack(LIZARD_EGG.get()), 1, 30, 0.05F));
+    }
+
     public SaltUpdate(IEventBus modBus) {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         FEATURES.register(modBus);
+        ENTITIES.register(modBus);
+        POI_TYPES.register(modBus);
+        PROFESSIONS.register(modBus);
+        modBus.addListener((EntityAttributeCreationEvent e) -> e.put(LIZARD.get(), LizardEntity.createAttributes().build()));
+        modBus.addListener((RegisterSpawnPlacementsEvent e) -> e.register(LIZARD.get(), SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LizardEntity::checkSpawn, RegisterSpawnPlacementsEvent.Operation.OR));
+        NeoForge.EVENT_BUS.addListener(SaltUpdate::trades);
         modBus.addListener((FMLCommonSetupEvent e) -> e.enqueueWork(SaltWorldgen::register));
         modBus.addListener(SaltUpdate::addToVanillaTabs);
     }
@@ -109,6 +165,8 @@ public class SaltUpdate {
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
             e.accept(SALT_CRYSTAL);
             e.accept(SALT_DUST);
+        } else if (tab == CreativeModeTabs.SPAWN_EGGS) {
+            e.accept(LIZARD_EGG);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             e.accept(JERKY);
             e.accept(PRETZEL);

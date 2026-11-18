@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "minecraft:block/calcite",
-    "top": "minecraft:block/calcite",
-    "side": "minecraft:block/calcite"
+    "bottom": "saltupdate:block/salt_block",
+    "top": "saltupdate:block/salt_block",
+    "side": "saltupdate:block/salt_block"
   }
 }

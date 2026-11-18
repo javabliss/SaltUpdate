@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/outer_stairs",
   "textures": {
-    "bottom": "minecraft:block/polished_diorite",
-    "top": "minecraft:block/polished_diorite",
-    "side": "minecraft:block/polished_diorite"
+    "bottom": "saltupdate:block/polished_salt",
+    "top": "saltupdate:block/polished_salt",
+    "side": "saltupdate:block/polished_salt"
   }
 }

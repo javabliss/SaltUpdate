@@ -22,5 +22,8 @@
   "item.saltupdate.salted_potato": "Солёный печёный картофель",
   "enchantment.saltupdate.salt_sting": "Соляное жало",
   "enchantment.saltupdate.salt_ward": "Соляная защита",
-  "biome.saltupdate.salt_flats": "Соляные равнины"
+  "biome.saltupdate.salt_flats": "Соляные равнины",
+  "entity.saltupdate.lizard": "Ящерица",
+  "item.saltupdate.lizard_spawn_egg": "Яйцо призыва ящерицы",
+  "entity.minecraft.villager.saltupdate.salt_merchant": "Торговец солью"
 }

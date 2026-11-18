@@ -34,9 +34,9 @@ public class SaltWorldgen {
 
         SurfaceRules.RuleSource salt = SurfaceRules.state(SaltUpdate.SALT_BLOCK.get().defaultBlockState());
         SurfaceRules.RuleSource rule = SurfaceRules.ifTrue(SurfaceRules.isBiome(SALT_FLATS),
-                SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.abovePreliminarySurface(), SurfaceRules.sequence(
                         SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, salt),
-                        SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, salt)));
+                        SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, salt))));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, SaltUpdate.MOD_ID, rule);
     }
 }

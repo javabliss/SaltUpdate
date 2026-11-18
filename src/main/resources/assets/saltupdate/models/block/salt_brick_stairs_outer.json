@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/outer_stairs",
   "textures": {
-    "bottom": "minecraft:block/quartz_bricks",
-    "top": "minecraft:block/quartz_bricks",
-    "side": "minecraft:block/quartz_bricks"
+    "bottom": "saltupdate:block/salt_bricks",
+    "top": "saltupdate:block/salt_bricks",
+    "side": "saltupdate:block/salt_bricks"
   }
 }

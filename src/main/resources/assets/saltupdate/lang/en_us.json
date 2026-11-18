@@ -22,5 +22,8 @@
   "item.saltupdate.salted_potato": "Salted Baked Potato",
   "enchantment.saltupdate.salt_sting": "Salt Sting",
   "enchantment.saltupdate.salt_ward": "Salt Ward",
-  "biome.saltupdate.salt_flats": "Salt Flats"
+  "biome.saltupdate.salt_flats": "Salt Flats",
+  "entity.saltupdate.lizard": "Lizard",
+  "item.saltupdate.lizard_spawn_egg": "Lizard Spawn Egg",
+  "entity.minecraft.villager.saltupdate.salt_merchant": "Salt Merchant"
 }

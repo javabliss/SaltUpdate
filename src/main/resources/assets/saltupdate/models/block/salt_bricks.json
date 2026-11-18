@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/quartz_bricks"
+    "all": "saltupdate:block/salt_bricks"
   }
 }
