@@ -83,7 +83,9 @@ def whiten_item(im, white=(244, 246, 250), gamma=0.75):
         for y in range(im.height):
             p = px[x, y]
             if p[3]:
-                f = (lum(p) / mx) ** gamma
+                r = lum(p) / mx
+                # контур остаётся тёмным, тело светлеет до белого
+                f = 0.30 + r if r < 0.2 else 0.66 + 0.34 * ((r - 0.2) / 0.8) ** 0.6
                 px[x, y] = tuple(int(c * f) for c in white) + (p[3],)
     return im
 
