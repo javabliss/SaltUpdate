@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "saltupdate:block/chiseled_salt"
+    "end": "minecraft:block/chiseled_quartz_block_top",
+    "side": "minecraft:block/chiseled_quartz_block"
   }
 }
