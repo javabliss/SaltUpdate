@@ -101,7 +101,6 @@ public class SaltUpdate {
 
     public static final DeferredItem<Item> JERKY = ITEMS.registerSimpleItem("jerky", food(4, 0.8F));
     public static final DeferredItem<Item> PRETZEL = ITEMS.registerSimpleItem("pretzel", food(5, 0.6F));
-    public static final DeferredItem<Item> SALTED_FISH = ITEMS.registerSimpleItem("salted_fish", food(5, 0.8F));
     public static final DeferredItem<Item> SALTED_POTATO = ITEMS.registerSimpleItem("salted_potato", food(6, 0.7F));
 
     // ---------- Генерация ----------
@@ -119,25 +118,31 @@ public class SaltUpdate {
 
     // ---------- Торговец солью ----------
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(Registries.POINT_OF_INTEREST_TYPE, MOD_ID);
-    public static final DeferredHolder<PoiType, PoiType> SALT_POI = POI_TYPES.register("salt_merchant",
+    public static final DeferredHolder<PoiType, PoiType> SALT_POI = POI_TYPES.register("cook",
             () -> new PoiType(ImmutableSet.copyOf(CHISELED_SALT.get().getStateDefinition().getPossibleStates()), 1, 1));
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(BuiltInRegistries.VILLAGER_PROFESSION, MOD_ID);
-    public static final DeferredHolder<VillagerProfession, VillagerProfession> SALT_MERCHANT = PROFESSIONS.register("salt_merchant",
-            () -> new VillagerProfession("salt_merchant", h -> h.is(SALT_POI.getId()), h -> h.is(SALT_POI.getId()),
+    public static final DeferredHolder<VillagerProfession, VillagerProfession> COOK = PROFESSIONS.register("cook",
+            () -> new VillagerProfession("cook", h -> h.is(SALT_POI.getId()), h -> h.is(SALT_POI.getId()),
                     ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_BUTCHER));
 
     private static void trades(VillagerTradesEvent e) {
-        if (e.getType() != SALT_MERCHANT.get()) return;
+        if (e.getType() != COOK.get()) return;
         var t = e.getTrades();
-        t.get(1).add(new BasicItemListing(new ItemStack(SALT_CRYSTAL.get(), 12), new ItemStack(Items.EMERALD), 16, 2, 0.05F));
+        t.get(1).add(new BasicItemListing(new ItemStack(Items.POTATO, 20), new ItemStack(Items.EMERALD), 16, 2, 0.05F));
+        t.get(1).add(new BasicItemListing(1, new ItemStack(Items.BREAD, 4), 16, 1, 0.05F));
         t.get(1).add(new BasicItemListing(1, new ItemStack(JERKY.get(), 4), 12, 1, 0.05F));
         t.get(1).add(new BasicItemListing(1, new ItemStack(SALT_DUST.get(), 6), 16, 1, 0.05F));
+        t.get(2).add(new BasicItemListing(new ItemStack(SALT_CRYSTAL.get(), 12), new ItemStack(Items.EMERALD), 16, 5, 0.05F));
+        t.get(2).add(new BasicItemListing(2, new ItemStack(Items.COOKED_BEEF, 4), 12, 5, 0.05F));
+        t.get(2).add(new BasicItemListing(1, new ItemStack(Items.COOKED_CHICKEN, 4), 12, 5, 0.05F));
         t.get(2).add(new BasicItemListing(1, new ItemStack(PRETZEL.get(), 4), 12, 5, 0.05F));
-        t.get(2).add(new BasicItemListing(2, new ItemStack(SALTED_FISH.get(), 3), 12, 5, 0.05F));
         t.get(3).add(new BasicItemListing(2, new ItemStack(SALTED_POTATO.get(), 4), 12, 10, 0.05F));
-        t.get(3).add(new BasicItemListing(3, new ItemStack(SALT_BRICKS.get(), 12), 12, 10, 0.05F));
-        t.get(4).add(new BasicItemListing(5, new ItemStack(SALT_BLOCK.get(), 16), 8, 15, 0.05F));
-        t.get(5).add(new BasicItemListing(12, new ItemStack(LIZARD_EGG.get()), 1, 30, 0.05F));
+        t.get(3).add(new BasicItemListing(1, new ItemStack(Items.PUMPKIN_PIE, 2), 12, 10, 0.05F));
+        t.get(3).add(new BasicItemListing(2, new ItemStack(Items.COOKIE, 12), 12, 10, 0.05F));
+        t.get(4).add(new BasicItemListing(3, new ItemStack(Items.CAKE), 6, 15, 0.05F));
+        t.get(4).add(new BasicItemListing(3, new ItemStack(Items.GOLDEN_CARROT, 3), 8, 15, 0.05F));
+        t.get(5).add(new BasicItemListing(4, new ItemStack(Items.HONEY_BOTTLE, 3), 8, 30, 0.05F));
+        t.get(5).add(new BasicItemListing(6, new ItemStack(SALTED_POTATO.get(), 12), 8, 30, 0.05F));
     }
 
     public SaltUpdate(IEventBus modBus) {
@@ -170,7 +175,6 @@ public class SaltUpdate {
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             e.accept(JERKY);
             e.accept(PRETZEL);
-            e.accept(SALTED_FISH);
             e.accept(SALTED_POTATO);
         }
     }

@@ -18,12 +18,11 @@
   "block.saltupdate.salt_brick_wall": "Стена из соляного кирпича",
   "item.saltupdate.salt_dust": "Соляная пыль",
   "item.saltupdate.pretzel": "Крендель",
-  "item.saltupdate.salted_fish": "Солёная рыба",
   "item.saltupdate.salted_potato": "Солёный печёный картофель",
   "enchantment.saltupdate.salt_sting": "Соляное жало",
   "enchantment.saltupdate.salt_ward": "Соляная защита",
   "biome.saltupdate.salt_flats": "Соляные равнины",
   "entity.saltupdate.lizard": "Ящерица",
   "item.saltupdate.lizard_spawn_egg": "Яйцо призыва ящерицы",
-  "entity.minecraft.villager.saltupdate.salt_merchant": "Торговец солью"
+  "entity.minecraft.villager.saltupdate.cook": "Торговец солью"
 }

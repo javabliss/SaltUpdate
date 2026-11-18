@@ -1,0 +1,40 @@
+name: Vanilla recolor and build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/**'
+      - '.github/workflows/recolor.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  recolor-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recolor vanilla textures
+        run: |
+          pip install pillow
+          python3 tools/recolor.py
+      - name: Commit textures
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add src
+          git diff --cached --quiet || git commit -m "Recolor vanilla textures to white (generated)"
+          git push
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
+      - run: gradle build --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saltupdate-jar
+          path: build/libs/*.jar

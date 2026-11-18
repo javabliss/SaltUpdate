@@ -2,6 +2,11 @@ package dev.saltupdate;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -38,6 +43,8 @@ public class TravertineTerracesFeature extends Feature<NoneFeatureConfiguration>
         BlockState salt = SaltUpdate.SALT_BLOCK.get().defaultBlockState();
         BlockState polished = SaltUpdate.POLISHED_SALT.get().defaultBlockState();
         BlockState water = Blocks.WATER.defaultBlockState();
+        List<BlockPos> waters = new ArrayList<>();
+        List<BlockPos> rims = new ArrayList<>();
 
         // от нижнего к верхнему, чтобы верхний бассейн не затирался
         for (int t = tiers - 1; t >= 0; t--) {
@@ -60,9 +67,10 @@ public class TravertineTerracesFeature extends Feature<NoneFeatureConfiguration>
                     }
                     if (rim) {
                         set(level, new BlockPos(x, waterY, z), (rand.nextInt(3) == 0) ? polished : salt);
+                        rims.add(new BlockPos(x, waterY + 1, z));
                     } else {
                         BlockPos wp = new BlockPos(x, waterY, z);
-                        if (set(level, wp, water)) level.scheduleTick(wp, Fluids.WATER, 0);
+                        if (set(level, wp, water)) { level.scheduleTick(wp, Fluids.WATER, 0); waters.add(wp); }
                     }
                     // расчистка над бассейном
                     for (int y = waterY + 1; y <= Math.max(g, waterY + 1) + 2; y++) {
@@ -72,7 +80,28 @@ public class TravertineTerracesFeature extends Feature<NoneFeatureConfiguration>
                 }
             }
         }
+        if (!waters.isEmpty()) {
+            for (int i = 0; i < 2; i++) {
+                BlockPos above = waters.get(rand.nextInt(waters.size())).above();
+                if (level.isEmptyBlock(above)) set(level, above, Blocks.FROGSPAWN.defaultBlockState());
+            }
+            spawn(level, EntityType.TADPOLE, waters, rand, 2 + rand.nextInt(3));
+            if (!rims.isEmpty()) spawn(level, EntityType.FROG, rims, rand, 1 + rand.nextInt(2));
+        }
         return true;
+    }
+
+    private static void spawn(WorldGenLevel level, EntityType<? extends Mob> type, List<BlockPos> spots, RandomSource rand, int count) {
+        for (int i = 0; i < count; i++) {
+            BlockPos p = spots.get(rand.nextInt(spots.size()));
+            if (!level.ensureCanWrite(p)) continue;
+            Mob mob = type.create(level.getLevel());
+            if (mob == null) continue;
+            mob.moveTo(p.getX() + 0.5, p.getY(), p.getZ() + 0.5, rand.nextFloat() * 360F, 0F);
+            mob.finalizeSpawn(level, level.getCurrentDifficultyAt(p), MobSpawnType.CHUNK_GENERATION, null);
+            mob.setPersistenceRequired();
+            level.addFreshEntityWithPassengers(mob);
+        }
     }
 
     private static boolean set(WorldGenLevel level, BlockPos pos, BlockState state) {

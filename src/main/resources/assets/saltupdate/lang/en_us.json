@@ -18,12 +18,11 @@
   "block.saltupdate.salt_brick_wall": "Salt Brick Wall",
   "item.saltupdate.salt_dust": "Salt Dust",
   "item.saltupdate.pretzel": "Pretzel",
-  "item.saltupdate.salted_fish": "Salted Fish",
   "item.saltupdate.salted_potato": "Salted Baked Potato",
   "enchantment.saltupdate.salt_sting": "Salt Sting",
   "enchantment.saltupdate.salt_ward": "Salt Ward",
   "biome.saltupdate.salt_flats": "Salt Flats",
   "entity.saltupdate.lizard": "Lizard",
   "item.saltupdate.lizard_spawn_egg": "Lizard Spawn Egg",
-  "entity.minecraft.villager.saltupdate.salt_merchant": "Salt Merchant"
+  "entity.minecraft.villager.saltupdate.cook": "Salt Merchant"
 }
