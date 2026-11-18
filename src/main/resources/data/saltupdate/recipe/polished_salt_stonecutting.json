@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "saltupdate:salt_block"
+  },
+  "result": {
+    "id": "saltupdate:polished_salt",
+    "count": 1
+  }
+}

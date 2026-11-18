@@ -1,0 +1,19 @@
+{
+  "values": [
+    "saltupdate:salt_ore",
+    "saltupdate:deepslate_salt_ore",
+    "saltupdate:salt_block",
+    "saltupdate:polished_salt",
+    "saltupdate:salt_bricks",
+    "saltupdate:chiseled_salt",
+    "saltupdate:salt_stairs",
+    "saltupdate:salt_slab",
+    "saltupdate:salt_wall",
+    "saltupdate:polished_salt_stairs",
+    "saltupdate:polished_salt_slab",
+    "saltupdate:polished_salt_wall",
+    "saltupdate:salt_brick_stairs",
+    "saltupdate:salt_brick_slab",
+    "saltupdate:salt_brick_wall"
+  ]
+}

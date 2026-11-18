@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "saltupdate:salt_crystal"
+    }
+  },
+  "result": {
+    "id": "saltupdate:salt_block",
+    "count": 1
+  }
+}

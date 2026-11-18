@@ -1,0 +1,7 @@
+{
+  "values": [
+    "saltupdate:salt_wall",
+    "saltupdate:polished_salt_wall",
+    "saltupdate:salt_brick_wall"
+  ]
+}

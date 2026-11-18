@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "saltupdate:block/salt_slab"
+    },
+    "type=top": {
+      "model": "saltupdate:block/salt_slab_top"
+    },
+    "type=double": {
+      "model": "saltupdate:block/salt_block"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "saltupdate:block/polished_salt"
+    }
+  }
+}

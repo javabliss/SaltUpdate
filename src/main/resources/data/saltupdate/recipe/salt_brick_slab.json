@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "saltupdate:salt_bricks"
+    }
+  },
+  "result": {
+    "id": "saltupdate:salt_brick_slab",
+    "count": 6
+  }
+}

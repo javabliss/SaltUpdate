@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "saltupdate:block/deepslate_salt_ore"
+    }
+  }
+}

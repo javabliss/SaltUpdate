@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "saltupdate:salt_bricks"
+  },
+  "result": {
+    "id": "saltupdate:salt_brick_slab",
+    "count": 2
+  }
+}

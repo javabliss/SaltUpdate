@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "saltupdate:deepslate_salt_ore"
+  },
+  "result": {
+    "id": "saltupdate:salt_crystal"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

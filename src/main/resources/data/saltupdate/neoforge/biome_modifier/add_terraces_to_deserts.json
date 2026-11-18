@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:desert",
+  "features": "saltupdate:travertine_terraces_rare",
+  "step": "local_modifications"
+}

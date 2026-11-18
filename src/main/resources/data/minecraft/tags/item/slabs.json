@@ -1,0 +1,7 @@
+{
+  "values": [
+    "saltupdate:salt_slab",
+    "saltupdate:polished_salt_slab",
+    "saltupdate:salt_brick_slab"
+  ]
+}

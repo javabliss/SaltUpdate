@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "saltupdate:salt_crystal"
+    }
+  ],
+  "result": {
+    "id": "saltupdate:salt_dust",
+    "count": 2
+  }
+}

@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+
+[[mods]]
+modId="saltupdate"
+version="1.0.0"
+displayName="Salt Update"
+description='''Соляное обновление: соляная руда, строительные блоки из соли, вяленое мясо и плавление льда солью.'''
+
+[[dependencies.saltupdate]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.saltupdate]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.saltupdate]]
+modId="terrablender"
+type="required"
+versionRange="[4.1.0,)"
+ordering="BEFORE"
+side="BOTH"

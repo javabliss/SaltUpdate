@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "saltupdate:polished_salt"
+    }
+  },
+  "result": {
+    "id": "saltupdate:salt_bricks",
+    "count": 4
+  }
+}
