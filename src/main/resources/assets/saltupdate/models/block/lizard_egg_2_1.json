@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_two_turtle_eggs",
+  "textures": {
+    "all": "saltupdate:block/lizard_egg_slightly_cracked",
+    "particle": "saltupdate:block/lizard_egg_slightly_cracked"
+  }
+}

@@ -24,5 +24,7 @@
   "biome.saltupdate.salt_flats": "Salt Flats",
   "entity.saltupdate.lizard": "Lizard",
   "item.saltupdate.lizard_spawn_egg": "Lizard Spawn Egg",
-  "entity.minecraft.villager.saltupdate.cook": "Salt Merchant"
+  "entity.minecraft.villager.saltupdate.cook": "Salt Merchant",
+  "block.saltupdate.lizard_egg": "Lizard Egg",
+  "item.saltupdate.fried_lizard_egg": "Fried Lizard Egg"
 }

@@ -24,5 +24,7 @@
   "biome.saltupdate.salt_flats": "Соляные равнины",
   "entity.saltupdate.lizard": "Ящерица",
   "item.saltupdate.lizard_spawn_egg": "Яйцо призыва ящерицы",
-  "entity.minecraft.villager.saltupdate.cook": "Торговец солью"
+  "entity.minecraft.villager.saltupdate.cook": "Торговец солью",
+  "block.saltupdate.lizard_egg": "Яйцо ящерицы",
+  "item.saltupdate.fried_lizard_egg": "Жареное яйцо ящерицы"
 }

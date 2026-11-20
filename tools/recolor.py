@@ -109,4 +109,21 @@ for (x, y) in cells[:5]:
 for (x, y) in cells[5:8]:
     dpx[x, y] = (255, 255, 255, 255)
 save(dust, "item/salt_dust")
+
+def tint(im, dark=(96, 106, 56), light=(244, 236, 204)):
+    """Яйцо ящерицы: яйцо черепахи, перекрашенное в кремово-оливковые тона."""
+    px = im.load()
+    ls = [lum(px[x, y]) for x in range(im.width) for y in range(im.height) if px[x, y][3]]
+    lo, hi = min(ls), max(ls)
+    for x in range(im.width):
+        for y in range(im.height):
+            p = px[x, y]
+            if p[3]:
+                t = (lum(p) - lo) / max(1, hi - lo)
+                px[x, y] = tuple(int(dark[i] + (light[i] - dark[i]) * t) for i in range(3)) + (p[3],)
+    return im
+
+for src, dst in (("turtle_egg", "lizard_egg"), ("turtle_egg_slightly_cracked", "lizard_egg_slightly_cracked"),
+                 ("turtle_egg_very_cracked", "lizard_egg_very_cracked")):
+    save(tint(load("block/" + src)), "block/" + dst)
 print("recolor done")

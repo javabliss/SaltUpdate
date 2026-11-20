@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "saltupdate:lizard_egg"
+  },
+  "result": {
+    "id": "saltupdate:fried_lizard_egg"
+  },
+  "experience": 0.35,
+  "cookingtime": 600
+}

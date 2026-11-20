@@ -19,6 +19,9 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -90,6 +93,10 @@ public class SaltUpdate {
 
     public static final DeferredBlock<Block> CHISELED_SALT = block("chiseled_salt", () -> new Block(saltProps()), true);
 
+    public static final DeferredBlock<LizardEggBlock> LIZARD_EGG_BLOCK = block("lizard_egg",
+            () -> new LizardEggBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.5F)
+                    .sound(SoundType.METAL).randomTicks().noOcclusion().pushReaction(PushReaction.DESTROY)), false);
+
     // ---------- Предметы ----------
     public static final DeferredItem<Item> SALT_CRYSTAL = ITEMS.registerSimpleItem("salt_crystal");
     /** Правый клик по снегу или льду плавит их в области. */
@@ -102,11 +109,20 @@ public class SaltUpdate {
     public static final DeferredItem<Item> JERKY = ITEMS.registerSimpleItem("jerky", food(4, 0.8F));
     public static final DeferredItem<Item> PRETZEL = ITEMS.registerSimpleItem("pretzel", food(5, 0.6F));
     public static final DeferredItem<Item> SALTED_POTATO = ITEMS.registerSimpleItem("salted_potato", food(6, 0.7F));
+    public static final DeferredItem<Item> FRIED_LIZARD_EGG = ITEMS.registerSimpleItem("fried_lizard_egg", food(5, 0.6F));
 
     // ---------- Генерация ----------
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, MOD_ID);
     public static final DeferredHolder<Feature<?>, TravertineTerracesFeature> TERRACES =
             FEATURES.register("travertine_terraces", TravertineTerracesFeature::new);
+
+    // ---------- Структура: дом повара ----------
+    public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, MOD_ID);
+    public static final DeferredHolder<StructureType<?>, StructureType<CookHouseStructure>> COOK_HOUSE_TYPE =
+            STRUCTURE_TYPES.register("cook_house", () -> (StructureType<CookHouseStructure>) () -> CookHouseStructure.CODEC);
+    public static final DeferredRegister<StructurePieceType> STRUCTURE_PIECES = DeferredRegister.create(Registries.STRUCTURE_PIECE, MOD_ID);
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> COOK_HOUSE_PIECE =
+            STRUCTURE_PIECES.register("cook_house", () -> (StructurePieceType.StructureTemplateType) CookHouseStructure.Piece::new);
 
     // ---------- Ящерица ----------
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, MOD_ID);
@@ -150,6 +166,8 @@ public class SaltUpdate {
         ITEMS.register(modBus);
         FEATURES.register(modBus);
         ENTITIES.register(modBus);
+        STRUCTURE_TYPES.register(modBus);
+        STRUCTURE_PIECES.register(modBus);
         POI_TYPES.register(modBus);
         PROFESSIONS.register(modBus);
         modBus.addListener((EntityAttributeCreationEvent e) -> e.put(LIZARD.get(), LizardEntity.createAttributes().build()));
@@ -165,6 +183,7 @@ public class SaltUpdate {
         if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             e.accept(SALT_ORE);
             e.accept(DEEPSLATE_SALT_ORE);
+            e.accept(LIZARD_EGG_BLOCK);
         } else if (tab == CreativeModeTabs.BUILDING_BLOCKS) {
             BUILDING.forEach(e::accept);
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
@@ -176,6 +195,7 @@ public class SaltUpdate {
             e.accept(JERKY);
             e.accept(PRETZEL);
             e.accept(SALTED_POTATO);
+            e.accept(FRIED_LIZARD_EGG);
         }
     }
 }
