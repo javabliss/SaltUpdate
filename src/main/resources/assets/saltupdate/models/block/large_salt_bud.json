@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "saltupdate:block/large_salt_bud"
+  },
+  "render_type": "minecraft:cutout"
+}

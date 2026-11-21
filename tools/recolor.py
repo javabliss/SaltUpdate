@@ -126,4 +126,8 @@ def tint(im, dark=(96, 106, 56), light=(244, 236, 204)):
 for src, dst in (("turtle_egg", "lizard_egg"), ("turtle_egg_slightly_cracked", "lizard_egg_slightly_cracked"),
                  ("turtle_egg_very_cracked", "lizard_egg_very_cracked")):
     save(tint(load("block/" + src)), "block/" + dst)
+
+for src, dst in (("amethyst_cluster", "salt_cluster"), ("large_amethyst_bud", "large_salt_bud"),
+                 ("medium_amethyst_bud", "medium_salt_bud"), ("small_amethyst_bud", "small_salt_bud")):
+    save(whiten_item(load("block/" + src), white=(240, 244, 252), gamma=0.8), "block/" + dst)
 print("recolor done")

@@ -26,5 +26,9 @@
   "item.saltupdate.lizard_spawn_egg": "Яйцо призыва ящерицы",
   "entity.minecraft.villager.saltupdate.cook": "Торговец солью",
   "block.saltupdate.lizard_egg": "Яйцо ящерицы",
-  "item.saltupdate.fried_lizard_egg": "Жареное яйцо ящерицы"
+  "item.saltupdate.fried_lizard_egg": "Жареное яйцо ящерицы",
+  "block.saltupdate.salt_cluster": "Соляная друза",
+  "block.saltupdate.large_salt_bud": "Большой соляной бутон",
+  "block.saltupdate.medium_salt_bud": "Средний соляной бутон",
+  "block.saltupdate.small_salt_bud": "Малый соляной бутон"
 }

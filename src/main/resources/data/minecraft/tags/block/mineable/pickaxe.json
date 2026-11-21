@@ -14,6 +14,10 @@
     "saltupdate:polished_salt_wall",
     "saltupdate:salt_brick_stairs",
     "saltupdate:salt_brick_slab",
-    "saltupdate:salt_brick_wall"
+    "saltupdate:salt_brick_wall",
+    "saltupdate:salt_cluster",
+    "saltupdate:large_salt_bud",
+    "saltupdate:medium_salt_bud",
+    "saltupdate:small_salt_bud"
   ]
 }

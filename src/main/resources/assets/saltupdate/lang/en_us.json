@@ -26,5 +26,9 @@
   "item.saltupdate.lizard_spawn_egg": "Lizard Spawn Egg",
   "entity.minecraft.villager.saltupdate.cook": "Salt Merchant",
   "block.saltupdate.lizard_egg": "Lizard Egg",
-  "item.saltupdate.fried_lizard_egg": "Fried Lizard Egg"
+  "item.saltupdate.fried_lizard_egg": "Fried Lizard Egg",
+  "block.saltupdate.salt_cluster": "Salt Cluster",
+  "block.saltupdate.large_salt_bud": "Large Salt Bud",
+  "block.saltupdate.medium_salt_bud": "Medium Salt Bud",
+  "block.saltupdate.small_salt_bud": "Small Salt Bud"
 }

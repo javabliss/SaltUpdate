@@ -97,6 +97,14 @@ public class SaltUpdate {
             () -> new LizardEggBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.5F)
                     .sound(SoundType.METAL).randomTicks().noOcclusion().pushReaction(PushReaction.DESTROY)), false);
 
+    private static BlockBehaviour.Properties clusterProps(int light) {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).mapColor(MapColor.SNOW).lightLevel(s -> light);
+    }
+    public static final DeferredBlock<AmethystClusterBlock> SALT_CLUSTER = block("salt_cluster", () -> new AmethystClusterBlock(7, 3, clusterProps(5)), false);
+    public static final DeferredBlock<AmethystClusterBlock> LARGE_SALT_BUD = block("large_salt_bud", () -> new AmethystClusterBlock(5, 3, clusterProps(4)), false);
+    public static final DeferredBlock<AmethystClusterBlock> MEDIUM_SALT_BUD = block("medium_salt_bud", () -> new AmethystClusterBlock(4, 3, clusterProps(2)), false);
+    public static final DeferredBlock<AmethystClusterBlock> SMALL_SALT_BUD = block("small_salt_bud", () -> new AmethystClusterBlock(3, 4, clusterProps(1)), false);
+
     // ---------- Предметы ----------
     public static final DeferredItem<Item> SALT_CRYSTAL = ITEMS.registerSimpleItem("salt_crystal");
     /** Правый клик по снегу или льду плавит их в области. */
@@ -184,6 +192,10 @@ public class SaltUpdate {
             e.accept(SALT_ORE);
             e.accept(DEEPSLATE_SALT_ORE);
             e.accept(LIZARD_EGG_BLOCK);
+            e.accept(SMALL_SALT_BUD);
+            e.accept(MEDIUM_SALT_BUD);
+            e.accept(LARGE_SALT_BUD);
+            e.accept(SALT_CLUSTER);
         } else if (tab == CreativeModeTabs.BUILDING_BLOCKS) {
             BUILDING.forEach(e::accept);
         } else if (tab == CreativeModeTabs.INGREDIENTS) {

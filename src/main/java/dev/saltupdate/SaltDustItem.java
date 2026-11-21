@@ -4,7 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -46,6 +50,18 @@ public class SaltDustItem extends Item {
             }
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    /** Соль вредна слизням: правый клик по слайму или магмовому кубу наносит урон. */
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+        if (!(target instanceof Slime)) return InteractionResult.PASS;
+        if (!player.level().isClientSide) {
+            target.hurt(player.damageSources().playerAttack(player), 4.0F);
+            player.level().playSound(null, target.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 1.6F);
+            if (!player.getAbilities().instabuild) stack.shrink(1);
+        }
+        return InteractionResult.sidedSuccess(player.level().isClientSide);
     }
 
     /** Во что превращается блок, либо null, если соль на него не действует. */
