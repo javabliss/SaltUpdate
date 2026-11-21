@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "saltupdate:block/salt_lamp"
+    }
+  }
+}

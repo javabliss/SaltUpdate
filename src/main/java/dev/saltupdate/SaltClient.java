@@ -1,5 +1,6 @@
 package dev.saltupdate;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -15,5 +16,6 @@ public class SaltClient {
     @SubscribeEvent
     public static void renderers(EntityRenderersEvent.RegisterRenderers e) {
         e.registerEntityRenderer(SaltUpdate.LIZARD.get(), LizardRenderer::new);
+        e.registerEntityRenderer(SaltUpdate.SALT_BOMB.get(), ThrownItemRenderer::new);
     }
 }

@@ -30,5 +30,8 @@
   "block.saltupdate.salt_cluster": "Соляная друза",
   "block.saltupdate.large_salt_bud": "Большой соляной бутон",
   "block.saltupdate.medium_salt_bud": "Средний соляной бутон",
-  "block.saltupdate.small_salt_bud": "Малый соляной бутон"
+  "block.saltupdate.small_salt_bud": "Малый соляной бутон",
+  "block.saltupdate.salt_lamp": "Соляная лампа",
+  "item.saltupdate.salt_bomb": "Соляная бомба",
+  "entity.saltupdate.salt_bomb": "Соляная бомба"
 }

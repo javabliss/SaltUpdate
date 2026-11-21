@@ -130,4 +130,13 @@ for src, dst in (("turtle_egg", "lizard_egg"), ("turtle_egg_slightly_cracked", "
 for src, dst in (("amethyst_cluster", "salt_cluster"), ("large_amethyst_bud", "large_salt_bud"),
                  ("medium_amethyst_bud", "medium_salt_bud"), ("small_amethyst_bud", "small_salt_bud")):
     save(whiten_item(load("block/" + src), white=(240, 244, 252), gamma=0.8), "block/" + dst)
+
+save(whiten(load("block/glowstone"), white=(252, 236, 200)), "block/salt_lamp")
+
+bomb = whiten_item(load("item/snowball"), white=(240, 244, 252), gamma=0.9)
+bp = bomb.load()
+for q in ((11, 2), (12, 1), (13, 1)):
+    bp[q] = (122, 84, 46, 255)
+bp[(13, 0)] = (250, 190, 60, 255)
+save(bomb, "item/salt_bomb")
 print("recolor done")

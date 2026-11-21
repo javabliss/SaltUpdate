@@ -105,6 +105,9 @@ public class SaltUpdate {
     public static final DeferredBlock<AmethystClusterBlock> MEDIUM_SALT_BUD = block("medium_salt_bud", () -> new AmethystClusterBlock(4, 3, clusterProps(2)), false);
     public static final DeferredBlock<AmethystClusterBlock> SMALL_SALT_BUD = block("small_salt_bud", () -> new AmethystClusterBlock(3, 4, clusterProps(1)), false);
 
+    public static final DeferredBlock<Block> SALT_LAMP = block("salt_lamp",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.3F).sound(SoundType.GLASS).lightLevel(s -> 14)), true);
+
     // ---------- Предметы ----------
     public static final DeferredItem<Item> SALT_CRYSTAL = ITEMS.registerSimpleItem("salt_crystal");
     /** Правый клик по снегу или льду плавит их в области. */
@@ -139,6 +142,13 @@ public class SaltUpdate {
                     .sized(0.7F, 0.4F).eyeHeight(0.3F).clientTrackingRange(8).build("lizard"));
     public static final DeferredItem<DeferredSpawnEggItem> LIZARD_EGG = ITEMS.register("lizard_spawn_egg",
             () -> new DeferredSpawnEggItem(LIZARD, 0x7a8a3e, 0x4e5c26, new Item.Properties()));
+
+    // ---------- Соляная бомба ----------
+    public static final DeferredHolder<EntityType<?>, EntityType<SaltBombEntity>> SALT_BOMB = ENTITIES.register("salt_bomb",
+            () -> EntityType.Builder.<SaltBombEntity>of(SaltBombEntity::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("salt_bomb"));
+    public static final DeferredItem<SaltBombItem> SALT_BOMB_ITEM = ITEMS.register("salt_bomb",
+            () -> new SaltBombItem(new Item.Properties().stacksTo(16)));
 
     // ---------- Торговец солью ----------
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(Registries.POINT_OF_INTEREST_TYPE, MOD_ID);
@@ -201,6 +211,8 @@ public class SaltUpdate {
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
             e.accept(SALT_CRYSTAL);
             e.accept(SALT_DUST);
+        } else if (tab == CreativeModeTabs.COMBAT) {
+            e.accept(SALT_BOMB_ITEM);
         } else if (tab == CreativeModeTabs.SPAWN_EGGS) {
             e.accept(LIZARD_EGG);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
